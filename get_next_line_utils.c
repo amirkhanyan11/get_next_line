@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/08 22:07:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/09 02:45:47 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(char const *str, char const c)
+char	*ft_strchr(char *str, char const c)
 {
 	int i;
 
@@ -20,22 +20,19 @@ int	ft_strchr(char const *str, char const c)
 	while (str[i])
 	{
 		if (str[i] == c)
-			return (1);
+			return (str + i);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
-int	ft_strlen(const char *str)
+int	ft_strlen(const char * const str)
 {
 	int	len;
 
 	len = 0;
-	while (*str)
-	{
-		str++;
+	while (str[len])
 		len++;
-	}
 	return (len);
 }
 
@@ -70,4 +67,31 @@ char  *ft_strjoin(char const * const self, char const * rhv)
 		tgt[k] = '\0';
 	free((void *)self);
 	return (tgt);
+}
+
+
+
+char	*ft_strdup(const char * const str)
+{
+	char	*dest;
+	size_t	i;
+
+	dest = (char *)malloc(ft_strlen(str) + 1);
+	if (!dest)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+
+char	*ft_strcpy(char *dst, const char *src)
+{
+	free(dst);
+	return (ft_strdup(src));
 }
