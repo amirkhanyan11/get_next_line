@@ -6,25 +6,16 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/09 02:49:48 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/09 03:31:29 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char * ft_read(int fd, char *buffer)
+static char * ft_read(int fd, char *buffer, char *str)
 {
-	char *str;
-
-	str = malloc(1);
-	str[0] = '\0';
-	while (read(fd, buffer, BUFFER_SIZE))
+	while (read(fd, buffer, BUFFER_SIZE) && !ft_strchr(str, '\n'))
 	{
-		if (ft_strchr(buffer, '\n'))
-		{
-			str = ft_strjoin(str, buffer);
-			break ;
-		}
 		str = ft_strjoin(str, buffer);
 	}
 	//printf("%s", str);
@@ -33,7 +24,7 @@ static char * ft_read(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*ptr;
+	static char	*str;
 	char *tmp;
 	static char buffer[BUFFER_SIZE + 1];
 
@@ -41,17 +32,26 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer[BUFFER_SIZE] = '\0';
 
-	if ((ptr) && (tmp = ft_strchr(buffer, '\n')))
+	if (!str)
 	{
-		ptr = ft_strcpy(ptr, tmp + 1);
-		if (ft_strchr(ptr, '\n'))
-			return ptr;
+		str = malloc(1);
+		str[0] = '\0';
 	}
-	else
-		free(ptr);
-	ptr = ft_read(fd, buffer);
-	//printf("%s", ptr);
-	return (ptr);
+
+	if (str)
+	{
+		free(str);
+		if (tmp = ft_strchr(buffer, '\n'))
+			str = ft_strdup(tmp + 1);
+		else
+			str = ft_strdup(buffer);
+		if (ft_strchr(str, '\n'))
+			return str;
+	}
+
+	str = ft_read(fd, buffer, str);
+	//printf("%s", str);
+	return (str);
 }
 
 

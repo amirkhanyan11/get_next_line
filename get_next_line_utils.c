@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/09 02:45:47 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/09 03:22:21 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ char  *ft_strjoin(char const * const self, char const * rhv)
 	j = 0;
 	k = 0;
 	tgt = (char *)malloc(ft_strlen(self) + ft_strlen(rhv) + 1);
-
+	if (!tgt)
+		return ((char *)self);
 	while (self[i] || (rhv[j] && rhv[j] != '\n'))
 	{
 		if (self[i])
@@ -87,11 +88,4 @@ char	*ft_strdup(const char * const str)
 	}
 	dest[i] = '\0';
 	return (dest);
-}
-
-
-char	*ft_strcpy(char *dst, const char *src)
-{
-	free(dst);
-	return (ft_strdup(src));
 }
