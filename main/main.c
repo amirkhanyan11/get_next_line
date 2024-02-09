@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:58:49 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/09 02:52:56 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/09 20:55:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main()
 		printf("%s", line);
 	}
 
-
 	free(line);
 	close(fd);
+	system("leaks a.out");
 }

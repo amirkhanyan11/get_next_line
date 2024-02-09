@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/09 03:22:21 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/09 20:35:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,17 @@ char	*ft_strdup(const char * const str)
 	if (!dest)
 		return (0);
 	i = 0;
-	while (str[i])
+	while (str[i] && str[i] != '\n')
 	{
 		dest[i] = str[i];
 		i++;
 	}
-	dest[i] = '\0';
+	if (str[i] == '\n')
+	{
+		dest[i] = '\n';
+		dest[i + 1] = '\0';
+	}
+	else
+		dest[i] = '\0';
 	return (dest);
 }
