@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/09 20:59:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:39:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,22 @@ char *ft_read(int fd, char *buffer, char *str, char **next_line)
 	if (ft_strchr(str, '\n'))
 		return (str);
 	char *n;
-	while (read(fd, buffer, BUFFER_SIZE))
+	int x;
+	while ((x = read(fd, buffer, BUFFER_SIZE)))
 	{
-		n = ft_strchr(buffer, '\n');
-		if (n)
+		if ((n = ft_strchr(buffer, '\n')))
 		{
 			*next_line = n + 1;
-			str = ft_strjoin(str, buffer);
-			break;
+			str = ft_strjoin(str, buffer, x);
+			return (str);
 		}
-		str = ft_strjoin(str, buffer);
+		str = ft_strjoin(str, buffer, x);
 	}
-	return (str);
+	if (strcmp(str, ""))
+		return (str);
+	//printf("%s", str);
+	free(str);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
@@ -51,11 +55,10 @@ char	*get_next_line(int fd)
 
 	else
 	{
-		//free(str);
-		if (next < buffer + ft_strlen(buffer))
+		if (next > buffer && (next - buffer) < ft_strlen(buffer))
 		{
 			str = ft_strdup(next);
-			next = ft_strchr(next + 1, '\n') + 1;
+			next = NULL;
 		}
 		else
 		{
@@ -67,6 +70,6 @@ char	*get_next_line(int fd)
 	}
 
 	str = ft_read(fd, buffer, str, &next);
-
+	//printf("%s", str);
 	return (str);
 }

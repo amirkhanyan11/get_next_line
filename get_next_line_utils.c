@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/09 20:35:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:38:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(char *str, char const c)
 {
 	int i;
 
+	if (!str)
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{
@@ -23,6 +25,8 @@ char	*ft_strchr(char *str, char const c)
 			return (str + i);
 		i++;
 	}
+	if (str[i] == c)
+		return (str + i);
 	return (NULL);
 }
 
@@ -30,18 +34,20 @@ int	ft_strlen(const char * const str)
 {
 	int	len;
 
+	if (!str)
+		return (-1);
 	len = 0;
 	while (str[len])
 		len++;
 	return (len);
 }
 
-char  *ft_strjoin(char const * const self, char const * rhv)
+char  *ft_strjoin(char const * const self, char const * rhv, const size_t len)
 {
 	char * tgt;
-	int i;
-	int j;
-	int k;
+	size_t i;
+	size_t j;
+	size_t k;
 
 	i = 0;
 	j = 0;
@@ -49,7 +55,7 @@ char  *ft_strjoin(char const * const self, char const * rhv)
 	tgt = (char *)malloc(ft_strlen(self) + ft_strlen(rhv) + 1);
 	if (!tgt)
 		return ((char *)self);
-	while (self[i] || (rhv[j] && rhv[j] != '\n'))
+	while (self[i] || (j < len && rhv[j] != '\n'))
 	{
 		if (self[i])
 		{
@@ -77,6 +83,8 @@ char	*ft_strdup(const char * const str)
 	char	*dest;
 	size_t	i;
 
+	if (!str)
+		return (NULL);
 	dest = (char *)malloc(ft_strlen(str) + 1);
 	if (!dest)
 		return (0);
