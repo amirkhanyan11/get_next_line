@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/12 21:26:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/13 00:28:50 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void ft_read(int fd, char **memory)
 		buffer[seen] = '\0';
 		if(!seen)
 			break ;
-		*memory = ft_append(*memory, buffer);
+		ft_append(memory, buffer);
+		//printf("%d\n", ft_strlen(*memory));
 	}
-	printf("memory : %s\n", *memory);
+	//printf("memory : %s\n", *memory);
 
 }
 
@@ -55,11 +56,13 @@ char	*get_next_line(int fd)
 		if ((nl = ft_strchr(memory, '\n')))
 		{
 			memory = ft_strdup(nl + 1);
+			//printf("%s\n", memory);
 			free(tmp);
 		}
 		else
 		{
-			free(tmp);
+			free(memory);
+			memory = NULL;
 			return (NULL);
 		}
 	}
@@ -69,7 +72,7 @@ char	*get_next_line(int fd)
 
 	if (!strcmp(memory, ""))
 	{
-		free(next_line);
+		free(next_line); // ???
 		free(memory);
 		memory = NULL;
 		return NULL;

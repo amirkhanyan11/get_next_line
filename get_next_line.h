@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:47:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/12 19:49:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/13 00:09:39 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 char	*ft_strchr(char *str, char const c);
 char	*ft_strdup(const char * const str);
-char  *ft_append(char const * self, char const * rhv);
+char  *ft_append(char ** self, char const * rhv);
 int	ft_strlen(const char * const str);
 char	*get_next_line(int fd);
 
