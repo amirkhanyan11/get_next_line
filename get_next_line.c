@@ -6,70 +6,75 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/10 20:39:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:26:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *ft_read(int fd, char *buffer, char *str, char **next_line)
+void ft_read(int fd, char **memory)
 {
-	if (ft_strchr(str, '\n'))
-		return (str);
-	char *n;
-	int x;
-	while ((x = read(fd, buffer, BUFFER_SIZE)))
+	size_t seen;
+	char buffer[BUFFER_SIZE + 1];
+	buffer[BUFFER_SIZE] = '\0';
+
+	seen = 0;
+	while (!ft_strchr(*memory, '\n'))
 	{
-		if ((n = ft_strchr(buffer, '\n')))
-		{
-			*next_line = n + 1;
-			str = ft_strjoin(str, buffer, x);
-			return (str);
-		}
-		str = ft_strjoin(str, buffer, x);
+		seen = read(fd, buffer, BUFFER_SIZE);
+		buffer[seen] = '\0';
+		if(!seen)
+			break ;
+		*memory = ft_append(*memory, buffer);
 	}
-	if (strcmp(str, ""))
-		return (str);
-	//printf("%s", str);
-	free(str);
-	return (NULL);
+	printf("memory : %s\n", *memory);
+
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
-	static char *next;
-	static char buffer[BUFFER_SIZE + 1];
+	static char	*memory;
+	char *next_line;
+	void *tmp;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
 		return (NULL);
-	buffer[BUFFER_SIZE] = '\0';
 
-	if (!str)
+	if (!memory)
 	{
-		str = malloc(1);
-		if (!str)
+		memory = malloc(1);
+		if (!memory)
 			return (NULL);
-		str[0] = '\0';
+		memory[0] = '\0';
 	}
 
 	else
 	{
-		if (next > buffer && (next - buffer) < ft_strlen(buffer))
+		char *nl;
+		tmp = memory;
+		if ((nl = ft_strchr(memory, '\n')))
 		{
-			str = ft_strdup(next);
-			next = NULL;
+			memory = ft_strdup(nl + 1);
+			free(tmp);
 		}
 		else
 		{
-			str = malloc(1);
-			if (!str)
-				return (NULL);
-			str[0] = '\0';
+			free(tmp);
+			return (NULL);
 		}
 	}
+	ft_read(fd, &memory);
 
-	str = ft_read(fd, buffer, str, &next);
-	//printf("%s", str);
-	return (str);
+	next_line = ft_strdup(memory);
+
+	if (!strcmp(memory, ""))
+	{
+		free(next_line);
+		free(memory);
+		memory = NULL;
+		return NULL;
+	}
+
+	//printf("%s", next_line);
+	return (next_line);
 }

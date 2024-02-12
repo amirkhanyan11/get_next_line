@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/10 20:38:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:48:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_strlen(const char * const str)
 	return (len);
 }
 
-char  *ft_strjoin(char const * const self, char const * rhv, const size_t len)
+char  *ft_append(char const * self, char const * rhv)
 {
 	char * tgt;
 	size_t i;
@@ -55,7 +55,7 @@ char  *ft_strjoin(char const * const self, char const * rhv, const size_t len)
 	tgt = (char *)malloc(ft_strlen(self) + ft_strlen(rhv) + 1);
 	if (!tgt)
 		return ((char *)self);
-	while (self[i] || (j < len && rhv[j] != '\n'))
+	while (self[i] || (rhv[j] && rhv[j] != '\n'))
 	{
 		if (self[i])
 		{
@@ -73,10 +73,9 @@ char  *ft_strjoin(char const * const self, char const * rhv, const size_t len)
 	else
 		tgt[k] = '\0';
 	free((void *)self);
+	self = tgt;
 	return (tgt);
 }
-
-
 
 char	*ft_strdup(const char * const str)
 {
@@ -103,3 +102,4 @@ char	*ft_strdup(const char * const str)
 		dest[i] = '\0';
 	return (dest);
 }
+
