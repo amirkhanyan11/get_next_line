@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 02:07:22 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/14 02:31:06 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,15 @@ char	*get_next_line(int fd)
 	}
 	else
 	{
-		if ((ind = ft_strchr(memory, '\n')))
+		ind = ft_strchr(memory, '\n');
+		if (ind)
 			ft_mutate(&memory, ind + 1);
 		else
 		{
 			free(memory);
-			memory = NULL;
-			return (NULL);
+			return ((memory = NULL));
 		}
 	}
 	ft_read(fd, &memory);
-
 	return (fetch(&memory));
 }

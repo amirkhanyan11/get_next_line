@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 01:44:55 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/14 02:30:06 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_append(char **self, char const *rhv)
 	(*self) = tgt;
 }
 
-void	ft_mutate(char ** memory, const char * str)
+void	ft_mutate(char **memory, const char *str)
 {
 	char	*dest;
 	size_t	i;

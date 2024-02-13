@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:47:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 01:45:08 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/14 02:30:06 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <unistd.h>
 
 char	*ft_strchr(char *str, char const c);
-void	ft_mutate(char ** memory, const char * str);
+void	ft_mutate(char **memory, const char *str);
 void	ft_append(char **self, char const *rhv);
 int		ft_strlen(const char *const str);
 char	*get_next_line(int fd);
