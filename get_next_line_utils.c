@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/13 00:22:11 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/14 00:34:22 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,12 @@ char	*ft_strdup(const char * const str)
 	if (!dest)
 		return (0);
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i])
 	{
 		dest[i] = str[i];
 		i++;
 	}
-	if (str[i] == '\n')
-	{
-		dest[i] = '\n';
-		dest[i + 1] = '\0';
-	}
-	else
-		dest[i] = '\0';
+	dest[i] = '\0';
 	return (dest);
 }
 
