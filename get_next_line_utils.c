@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 00:34:22 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/14 01:44:55 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(char *str, char const c)
 {
-	int i;
+	int	i;
 
 	if (!str)
 		return (NULL);
@@ -30,7 +30,7 @@ char	*ft_strchr(char *str, char const c)
 	return (NULL);
 }
 
-int	ft_strlen(const char * const str)
+int	ft_strlen(const char *const str)
 {
 	int	len;
 
@@ -42,19 +42,19 @@ int	ft_strlen(const char * const str)
 	return (len);
 }
 
-char  *ft_append(char **self, char const * rhv)
+void	ft_append(char **self, char const *rhv)
 {
-	char * tgt;
-	size_t i;
-	size_t j;
-	size_t k;
+	char	*tgt;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
 	i = 0;
 	j = 0;
 	k = 0;
 	tgt = (char *)malloc(ft_strlen((*self)) + ft_strlen(rhv) + 1);
 	if (!tgt)
-		return ((char *)(*self));
+		return ;
 	while ((*self)[i] || rhv[j])
 	{
 		if ((*self)[i])
@@ -64,27 +64,20 @@ char  *ft_append(char **self, char const * rhv)
 		k++;
 	}
 	if (rhv[j] == '\n')
-	{
-		tgt[k] = '\n';
-		tgt[k + 1] = '\0';
-	}
-	else
-		tgt[k] = '\0';
+		tgt[k++] = '\n';
+	tgt[k] = '\0';
 	free((void *)(*self));
 	(*self) = tgt;
-	return (*self);
 }
 
-char	*ft_strdup(const char * const str)
+void	ft_mutate(char ** memory, const char * str)
 {
 	char	*dest;
 	size_t	i;
 
-	if (!str)
-		return (NULL);
 	dest = (char *)malloc(ft_strlen(str) + 1);
 	if (!dest)
-		return (0);
+		return ;
 	i = 0;
 	while (str[i])
 	{
@@ -92,6 +85,6 @@ char	*ft_strdup(const char * const str)
 		i++;
 	}
 	dest[i] = '\0';
-	return (dest);
+	free((void *)(*memory));
+	*memory = dest;
 }
-
