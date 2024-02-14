@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 02:30:06 by kali             ###   ########.fr       */
+/*   Updated: 2024/02/14 19:58:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	ft_strlen(const char *const str)
 	return (len);
 }
 
-void	ft_append(char **self, char const *rhv)
+void	ft_append(char **memory, char const *buffer)
 {
-	char	*tgt;
+	char	*target;
 	size_t	i;
 	size_t	j;
 	size_t	k;
@@ -52,22 +52,20 @@ void	ft_append(char **self, char const *rhv)
 	i = 0;
 	j = 0;
 	k = 0;
-	tgt = (char *)malloc(ft_strlen((*self)) + ft_strlen(rhv) + 1);
-	if (!tgt)
+	target = (char *)malloc(ft_strlen((*memory)) + ft_strlen(buffer) + 1);
+	if (!target)
 		return ;
-	while ((*self)[i] || rhv[j])
+	while ((*memory)[i] || buffer[j])
 	{
-		if ((*self)[i])
-			tgt[k] = (*self)[i++];
+		if ((*memory)[i])
+			target[k] = (*memory)[i++];
 		else
-			tgt[k] = rhv[j++];
+			target[k] = buffer[j++];
 		k++;
 	}
-	if (rhv[j] == '\n')
-		tgt[k++] = '\n';
-	tgt[k] = '\0';
-	free((void *)(*self));
-	(*self) = tgt;
+	target[k] = '\0';
+	free((void *)(*memory));
+	(*memory) = target;
 }
 
 void	ft_mutate(char **memory, const char *str)
