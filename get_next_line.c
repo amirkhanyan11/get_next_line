@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 20:02:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/14 20:15:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_read(int fd, char **memory)
+void	ft_read(int const fd, char **const memory)
 {
 	size_t	seen;
 	char	*buffer;
@@ -57,5 +57,5 @@ char	*get_next_line(int fd)
 		}
 	}
 	ft_read(fd, &memory);
-	return (fetch(&memory));
+	return (ft_fetch(&memory));
 }

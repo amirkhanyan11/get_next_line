@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:47:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 20:01:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/14 20:15:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 # include <string.h>
 # include <unistd.h>
 
-char	*ft_strchr(char *str, char const c);
-void	ft_mutate(char **memory, const char *str);
-void	ft_append(char **self, char const *rhv);
-int		ft_strlen(const char *const str);
 char	*get_next_line(int fd);
-char	*fetch(char **memory);
-void	ft_read(int fd, char **memory);
+char	*ft_strchr(char *const str, char const c);
+int		ft_strlen(char const *const str);
+void	ft_mutate(char **const memory, char const *const newline);
+void	ft_append(char **const memory, char const *const buffer);
+char	*ft_fetch(char **const memory);
+void	ft_read(int const fd, char **const memory);
 
 #endif // GET_NEXT_LINE_H

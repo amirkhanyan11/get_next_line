@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 20:01:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/14 20:15:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(char *str, char const c)
+char	*ft_strchr(char *const str, char const c)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ char	*ft_strchr(char *str, char const c)
 	return (NULL);
 }
 
-int	ft_strlen(const char *const str)
+int	ft_strlen(char const *const str)
 {
 	int	len;
 
@@ -42,7 +42,7 @@ int	ft_strlen(const char *const str)
 	return (len);
 }
 
-void	ft_append(char **memory, char const *buffer)
+void	ft_append(char **const memory, char const *const buffer)
 {
 	char	*target;
 	size_t	i;
@@ -68,18 +68,18 @@ void	ft_append(char **memory, char const *buffer)
 	(*memory) = target;
 }
 
-void	ft_mutate(char **memory, const char *str)
+void	ft_mutate(char **const memory, char const *const newline)
 {
 	char	*dest;
 	size_t	i;
 
-	dest = (char *)malloc(ft_strlen(str) + 1);
+	dest = (char *)malloc(ft_strlen(newline) + 1);
 	if (!dest)
 		return ;
 	i = 0;
-	while (str[i])
+	while (newline[i])
 	{
-		dest[i] = str[i];
+		dest[i] = newline[i];
 		i++;
 	}
 	dest[i] = '\0';
@@ -87,7 +87,7 @@ void	ft_mutate(char **memory, const char *str)
 	*memory = dest;
 }
 
-char	*fetch(char **memory)
+char	*ft_fetch(char **const memory)
 {
 	char	*next_line;
 	size_t	i;
