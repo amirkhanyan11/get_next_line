@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 19:58:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/14 20:01:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,30 @@ void	ft_mutate(char **memory, const char *str)
 	dest[i] = '\0';
 	free((void *)(*memory));
 	*memory = dest;
+}
+
+char	*fetch(char **memory)
+{
+	char	*next_line;
+	size_t	i;
+
+	if (**memory == '\0')
+	{
+		free(*memory);
+		*memory = NULL;
+		return (NULL);
+	}
+	next_line = (char *)malloc(ft_strlen((*memory)) + 1);
+	if (!next_line)
+		return (0);
+	i = 0;
+	while ((*memory)[i] && (*memory)[i] != '\n')
+	{
+		next_line[i] = (*memory)[i];
+		i++;
+	}
+	if ((*memory)[i] == '\n')
+		next_line[i++] = '\n';
+	next_line[i] = '\0';
+	return (next_line);
 }
