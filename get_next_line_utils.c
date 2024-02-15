@@ -63,10 +63,9 @@ void	ft_append(char **const memory, char const *const buffer)
 	while ((*memory)[i] || buffer[j])
 	{
 		if ((*memory)[i])
-			target[k] = (*memory)[i++];
+			target[k++] = (*memory)[i++];
 		else
-			target[k] = buffer[j++];
-		k++;
+			target[k++] = buffer[j++];
 	}
 	target[k] = '\0';
 	free((void *)(*memory));
