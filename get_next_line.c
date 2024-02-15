@@ -6,30 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 20:15:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:18:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	ft_read(int const fd, char **const memory)
-{
-	size_t	seen;
-	char	*buffer;
-
-	buffer = malloc(BUFFER_SIZE + 1);
-	buffer[BUFFER_SIZE] = '\0';
-	seen = 0;
-	while (!ft_strchr(*memory, '\n'))
-	{
-		seen = read(fd, buffer, BUFFER_SIZE);
-		buffer[seen] = '\0';
-		if (!seen)
-			break ;
-		ft_append(memory, buffer);
-	}
-	free(buffer);
-}
 
 char	*get_next_line(int fd)
 {
@@ -47,7 +28,7 @@ char	*get_next_line(int fd)
 	}
 	else
 	{
-		newline = ft_strchr(memory, '\n');
+		newline = ft_frankenstein(memory, '\n', ft_strchr);
 		if (newline)
 			ft_mutate(&memory, newline + 1);
 		else

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:58:49 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 20:44:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:00:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void gnl(int fd, char * str)
 
 
 	line = get_next_line(fd);
-	//printf("%s", line);
 	if (!line && !str)
 		printf("1 & NULLIK\n");
 	else

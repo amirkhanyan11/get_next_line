@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:47:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 20:15:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:18:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@
 # include <string.h>
 # include <unistd.h>
 
+typedef enum e_Mode
+{
+	ft_strchr,
+	ft_strlen
+}		t_Mode;
+
 char	*get_next_line(int fd);
-char	*ft_strchr(char *const str, char const c);
-int		ft_strlen(char const *const str);
+char	*ft_frankenstein(char *str, char const c, t_Mode mode);
 void	ft_mutate(char **const memory, char const *const newline);
 void	ft_append(char **const memory, char const *const buffer);
 char	*ft_fetch(char **const memory);

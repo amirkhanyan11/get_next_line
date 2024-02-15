@@ -6,40 +6,43 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/14 20:15:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:15:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(char *const str, char const c)
+void	ft_read(int const fd, char **const memory)
 {
-	int	i;
+	size_t	seen;
+	char	*buffer;
 
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (str[i])
+	buffer = malloc(BUFFER_SIZE + 1);
+	buffer[BUFFER_SIZE] = '\0';
+	seen = 0;
+	while (!ft_frankenstein(*memory, '\n', ft_strchr))
 	{
-		if (str[i] == c)
-			return (str + i);
-		i++;
+		seen = read(fd, buffer, BUFFER_SIZE);
+		buffer[seen] = '\0';
+		if (!seen)
+			break ;
+		ft_append(memory, buffer);
 	}
-	if (str[i] == c)
-		return (str + i);
-	return (NULL);
+	free(buffer);
 }
 
-int	ft_strlen(char const *const str)
+char	*ft_frankenstein(char *str, char const c, t_Mode mode)
 {
-	int	len;
-
-	if (!str)
-		return (-1);
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	if (mode == ft_strchr)
+	{
+		while (*str)
+			if (*(str++) == c)
+				return (str - 1);
+		return (NULL);
+	}
+	while (*str && *str != c)
+		str++;
+	return (str);
 }
 
 void	ft_append(char **const memory, char const *const buffer)
@@ -52,7 +55,9 @@ void	ft_append(char **const memory, char const *const buffer)
 	i = 0;
 	j = 0;
 	k = 0;
-	target = (char *)malloc(ft_strlen((*memory)) + ft_strlen(buffer) + 1);
+	target = (char *)malloc((ft_frankenstein((char *)(*memory), 0, ft_strlen)
+				- (*memory)) + (ft_frankenstein((char *)buffer, 0, ft_strlen)
+				+ 1 - buffer));
 	if (!target)
 		return ;
 	while ((*memory)[i] || buffer[j])
@@ -73,7 +78,8 @@ void	ft_mutate(char **const memory, char const *const newline)
 	char	*dest;
 	size_t	i;
 
-	dest = (char *)malloc(ft_strlen(newline) + 1);
+	dest = (char *)malloc(ft_frankenstein((char *)newline, 0, ft_strlen)
+			- newline + 1);
 	if (!dest)
 		return ;
 	i = 0;
@@ -98,7 +104,8 @@ char	*ft_fetch(char **const memory)
 		*memory = NULL;
 		return (NULL);
 	}
-	next_line = (char *)malloc(ft_strlen((*memory)) + 1);
+	next_line = (char *)malloc(ft_frankenstein((char *)(*memory), '\n',
+				ft_strlen) + 1 - *memory);
 	if (!next_line)
 		return (0);
 	i = 0;
