@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/15 17:05:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:01:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*memory;
+	static char	*memory[OPEN_MAX];
 	char		*newline;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
 		return (NULL);
-	if (!memory)
+	if (!(memory[fd]))
 	{
-		memory = malloc(1);
-		if (!memory)
+		(memory[fd]) = malloc(1);
+		if (!(memory[fd]))
 			return (NULL);
-		memory[0] = '\0';
+		(memory[fd])[0] = '\0';
 	}
 	else
 	{
-		newline = ft_frankenstein(memory, '\n', ft_strchr);
+		newline = ft_frankenstein((memory[fd]), '\n', ft_strchr);
 		if (newline)
-			ft_mutate(&memory, newline + 1);
+			ft_mutate(&(memory[fd]), newline + 1);
 		else
 		{
-			free(memory);
-			return ((memory = NULL));
+			free((memory[fd]));
+			return (((memory[fd]) = NULL));
 		}
 	}
-	ft_read(fd, &memory);
-	return (ft_fetch(&memory));
+	ft_read(fd, &(memory[fd]));
+	return (ft_fetch(&(memory[fd])));
 }
