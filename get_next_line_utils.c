@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/15 16:15:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:42:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,16 @@ char	*ft_frankenstein(char *str, char const c, t_Mode mode)
 				return (str - 1);
 		return (NULL);
 	}
-	while (*str && *str != c)
-		str++;
-	return (str);
+	else if (mode == ft_strlen)
+	{
+
+		while (*str && *str != c)
+			str++;
+		return (str);
+	}
+	else if (mode == ft_dealloc)
+		free(str);
+	return (NULL);
 }
 
 void	ft_append(char **const memory, char const *const buffer)

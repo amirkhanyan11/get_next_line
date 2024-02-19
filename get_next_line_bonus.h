@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:47:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/02/15 17:01:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:41:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 typedef enum e_Mode
 {
 	ft_strchr,
-	ft_strlen
+	ft_strlen,
+	ft_dealloc
 }		t_Mode;
 
 char	*get_next_line(int fd);
